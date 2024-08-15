@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class MonitoramentoDados {
+
+    // Função para calcular a diferença entre o limite e o consumo total
+    public static void verificarConsumo(int limiteGB, int consumoMB) {
+        // Converter o limite de GB para MB
+        int limiteMB = limiteGB * 1024;
+        
+        if (consumoMB > limiteMB) {
+            // Se o consumo excede o limite
+            System.out.println("Limite de dados excedido. Compre ou renove seu pacote.");
+        } else {
+            // Se o consumo está dentro do limite
+            int mbDisponivel = limiteMB - consumoMB;
+            System.out.println("Voce ainda possui " + mbDisponivel + " MB disponiveis.");
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            // Usando BufferedReader para ler a entrada
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            
+            // Lendo o limite de dados em GB
+            int limiteGB = Integer.parseInt(br.readLine().trim());
+            
+            // Lendo o consumo total em MB
+            int consumoMB = Integer.parseInt(br.readLine().trim());
+            
+            // Verificar o consumo e exibir o resultado
+            verificarConsumo(limiteGB, consumoMB);
+        } catch (IOException e) {
+            System.err.println("Erro ao ler a entrada: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Erro ao converter os números. Certifique-se de que a entrada está correta.");
+        }
+    }
+}
